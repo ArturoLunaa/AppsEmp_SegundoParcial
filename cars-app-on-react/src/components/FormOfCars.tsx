@@ -59,17 +59,48 @@ export default function FormOfCars(){
     }
 
     return (
-        <form>
-            <p>Create a new car</p>
-            <input type="text" placeholder="ID" value={id} onChange={handleIdChange}/>
-            <br />
-            <input type="text" placeholder="Model" value={model} onChange={handleModelChange} />
-            <br />
-            <input type="text" placeholder="Brand" value={brand} onChange={handleBrandChange} />
-            <br />
-            <input type="number" placeholder="Year" value={year} onChange={handleYearChange}/>
-            <br />
-            <button onClick={handleSave}>Save</button>
-        </form>
+        <div className="container-fluid mt-5">
+        <div className="row align-items-center justify-content-center fullheight">
+            <div className="col-10 col-sm-8 col-md-6 col-lg-5">
+                <div className="card shadow-lg card--bg-gray card--customized">
+                    <div className="card-body">
+                        <h1 className="card-title">Create a new car</h1>
+                        <form id="myform">
+                            <div className="mb-2 control-wrapper">
+                                <div className="label-container">
+                                    <label htmlFor="ID" className="form-label">ID</label>
+                                </div>
+                                <input id="ID" type="text" className="form-control" placeholder="ID" value={id} onChange={handleIdChange}/>
+                                <div className="display-msg"></div>
+                            </div>
+                            <div className="mb-2 control-wrapper">
+                                <div className="label-container">
+                                    <label htmlFor="model" className="form-label">Model</label>
+                                </div>
+                                <input id="model" type="text" className="form-control" value={model} onChange={handleModelChange} />
+                                <div className="display-msg"></div>
+                            </div>
+                            <div className="mb-2 control-wrapper">
+                                <div className="label-container">
+                                    <label htmlFor="brand" className="form-label">Brand</label>
+                                </div>
+                                <input id="brand" className="form-control" type="text" value={brand} onChange={handleBrandChange} />
+                                <div className="display-msg"></div>
+                            </div>
+                            <div className="mb-2 control-wrapper">
+                                <div className="label-container">
+                                    <label htmlFor="year" className="form-label">Year</label>
+                                </div>
+                                <input id="year" type="number" placeholder="" value={year} onChange={handleYearChange} className="form-control"/>
+                                <div className="display-msg"></div>
+                            </div>
+                            <button onClick={handleSave} type="submit" className="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     );
 }

@@ -35,8 +35,10 @@ export default function CarList() {
 
 
   return(
-       <div>
-         {renderCars()}
-       </div>
+    <div className="text-center">
+    <ul className="list-group">
+     {renderCars()}
+   </ul>
+  </div>
   );
 }
