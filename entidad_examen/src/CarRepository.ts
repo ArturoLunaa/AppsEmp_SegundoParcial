@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import IRepository from './IRepository';
-import Car from './Car';
+import Car from './domain-layer/entities/Car';
 
 export default class CarRepository implements IRepository<Car> {
   private cars: Car[] = [];

@@ -1,9 +1,10 @@
 import express from 'express';
 import { json } from 'body-parser';
 import cors from 'cors';
+import 'reflect-metadata';
 import CarRepository from './CarRepository';
 import respond from './respond';
-import Car from './Car';
+import Car from './domain-layer/entities/Car';
 
 const app = express();
 
