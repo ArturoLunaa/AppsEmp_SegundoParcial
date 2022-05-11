@@ -2,8 +2,8 @@ import express from 'express';
 import { json } from 'body-parser';
 import cors from 'cors';
 import 'reflect-metadata';
-import CarRepository from './CarRepository';
-import respond from './respond';
+import CarRepository from './service-layer/tasks/CarRepository';
+import respond from './service-layer/tasks/respond';
 import Car from './domain-layer/entities/Car';
 
 const app = express();
