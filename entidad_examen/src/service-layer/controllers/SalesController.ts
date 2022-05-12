@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import AddSales, {AddSalesData} from '../tasks/AddSales';
+import AddSalesTask, {AddSaleData} from '../tasks/AddSaleTask';
 import BaseController from './BaseController';
 
 export default class InventoryInsController extends BaseController {
@@ -8,14 +8,14 @@ export default class InventoryInsController extends BaseController {
   }
 
   protected configureRouter(): void {
-    this.router.post('/', this.addSales.bind(this));
+    this.router.post('/', this.addSale.bind(this));
   }
 
-  private async addSales(req: Request, res: Response): Promise<void> {
+  private async addSale(req: Request, res: Response): Promise<void> {
     try {
-      const addCarData = <AddSalesData>req.body;
+      const addSaleData = <AddSaleData>req.body;
 
-      const addSalesTask = new AddSales(addCarData);
+      const addSalesTask = new AddSalesTask(addSaleData);
       const sales = await addSalesTask.execute();
   
       this.respond(res, 200, sales);

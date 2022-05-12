@@ -60,7 +60,7 @@ export default function FormOfSales(){
                             </div>
                             <div className="mb-2 control-wrapper">
                                 <div className="label-container">
-                                    <label htmlFor="amount" className="form-label">Year</label>
+                                    <label htmlFor="amount" className="form-label">Amount</label>
                                 </div>
                                 <input id="amount" type="number" placeholder="" value={amount} onChange={handleAmountChange} className="form-control"/>
                                 <div className="display-msg"></div>
