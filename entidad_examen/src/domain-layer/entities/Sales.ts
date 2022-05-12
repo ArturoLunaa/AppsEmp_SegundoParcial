@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import Car from './Car';
 
 @Entity()
-export default class InventoryIns {
+export default class Sales {
   @PrimaryGeneratedColumn({ type: 'int', unsigned: true, zerofill: true })
   public id: number;
 
@@ -10,16 +10,16 @@ export default class InventoryIns {
   @JoinColumn()
   public car: Car;
 
-  @Column({ type: 'smallint', nullable: false })
-  public quantity: number;
+  @Column({ type: 'double', nullable: false })
+  public price: number;
 
   @Column({ type: 'datetime', nullable: false })
-  public date: Date;
+  public soldDate: Date;
 
-  public constructor(id: number, car: Car, quantity: number, date: Date) {
+  public constructor(id: number, car: Car, price: number, soldDate: Date) {
     this.id = id;
     this.car = car;
-    this.quantity = quantity;
-    this.date = date;
+    this.price = price;
+    this.soldDate = soldDate;
   }
 }
