@@ -12,7 +12,7 @@ export default class DatabaseConnection {
             host: 'localhost',
             port: 3306,
             username: 'root',
-            password: '******',
+            password: 'admin123',
             database: 'car_db',
             entities: [Car],
             synchronize: true,
