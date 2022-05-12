@@ -14,19 +14,22 @@ export default class CarsController extends BaseController{
   }
 
   protected configureRouter(): void {
-    this.router.get('/', this.getCarsList);
-    this.router.get('/:id', this.findCar);
-    this.router.post('/', this.addCar);
-    this.router.put('/', this.updateCar);
-    this.router.delete('/:id', this.deleteCar);
+    this.router.get('/', this.getCarsList.bind(this));
+    this.router.get('/:id', this.findCar.bind(this));
+    this.router.post('/', this.addCar.bind(this));
+    this.router.put('/', this.updateCar.bind(this));
+    this.router.delete('/:id', this.deleteCar.bind(this));
   }
 
   private async getCarsList(req: Request, res: Response): Promise<void>{
-    const getCarListTask = new GetCarListTask();
-    const carsList = await getCarListTask.execute();
+    try {
+      const getCarListTask = new GetCarListTask();
+      const carsList = await getCarListTask.execute();
 
-    res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(carsList))
+      this.respond(res, 200, carsList);
+    } catch (e) {
+      this.respond(res, 500);
+    }
   }
 
   private async findCar(req: Request, res: Response): Promise<void> {
@@ -36,55 +39,48 @@ export default class CarsController extends BaseController{
 
       const car = await getCarListTask.execute();
 
-      res.writeHead(200, {'Content-Type': 'aplication/json'});
-      res.end(JSON.stringify(car));
+      this.respond(res, 200, car);
     }catch (e){
-      if((<Error>e).message === 'Car not found'){
-        res.writeHead(404, {'Content-Type': 'application/json'});
-        res.end();
-      }else{
-        res.writeHead(500, { 'Content-Type': 'aplication/json'});
-        res.end();
+     if ((<Error>e).message === 'Car not found.') {
+        this.respond(res, 404);
+      } else {
+        this.respond(res, 500);
       }
     }
 
   }
 
   private async addCar(req: Request, res: Response): Promise<void> {
-    const carData = <AddCarData>req.body;
+    try {
+      const carData = <AddCarData>req.body;
 
-    const addCarTask = new AddCarTask(carData);
+      const addCarTask = new AddCarTask(carData);
 
+      const car = await addCarTask.execute();
 
-    const car = await addCarTask.execute();
+      this.respond(res, 200, car);
 
-    res.writeHead(200, {'Content-Type': 'aplication/json'});
-    res.end(JSON.stringify(car));
-
+    } catch (e) {
+      this.respond(res, 500);
+    }
   }
 
   private async updateCar(req: Request, res: Response): Promise<void> {
-    
-    try{
-    const carData = <UpdateCarData>req.body;
-
-    const updateCarTask = new UpdateCarTask(carData);
-
-
-    const updatedCar = await updateCarTask.execute();
-
-    res.writeHead(200, {'Content-Type': 'aplication/json'});
-    res.end(JSON.stringify(updatedCar));
-    }catch (e) {
-      if ((<Error>e).message === 'Car not found'){
-        res.writeHead(404, {'Content-Type': 'application/json'});
-        res.end();
-      }else{
-        res.writeHead(500, { 'Content-Type': 'aplication/json'});
-        res.end();
+      try {
+        const carData = <UpdateCarData>req.body;
+  
+        const updateCarTask = new UpdateCarTask(carData);
+  
+        const updatedCar = await updateCarTask.execute();
+  
+        this.respond(res, 200, updatedCar);
+      } catch (e) {
+        if ((<Error>e).message === 'Car not found.') {
+          this.respond(res, 404);
+        } else {
+          this.respond(res, 500);
+        }
       }
-    }
-
   }
 
   private async deleteCar(req: Request, res: Response): Promise<void> {

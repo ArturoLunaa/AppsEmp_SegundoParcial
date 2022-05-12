@@ -1,5 +1,6 @@
 import { DataSource, EntityTarget, Repository } from "typeorm";
 import Car from "../domain-layer/entities/Car";
+import Sales from "../domain-layer/entities/Sales";
 
 export default class DatabaseConnection {
     private static instance: DatabaseConnection;
@@ -12,9 +13,9 @@ export default class DatabaseConnection {
             host: 'localhost',
             port: 3306,
             username: 'root',
-            password: 'admin123',
+            password: 'lgja010306mys',
             database: 'car_db',
-            entities: [Car],
+            entities: [Car, Sales],
             synchronize: true,
         });
     }
