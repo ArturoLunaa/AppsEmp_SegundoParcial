@@ -8,7 +8,8 @@ export default function CarList() {
   const [loaded, setLoaded] = useState<boolean>(false);
 
   async function LoadCars() {
-      const response = await axios.get('http://localhost:3002/cars');
+      const response = await axios.get('http://127.0.0.1:3001/cars');
+      console.log(response)
       setCars(
           response.data.map((c: Car) => new Car(c.id, c.model, c.brand, c.year))
       );

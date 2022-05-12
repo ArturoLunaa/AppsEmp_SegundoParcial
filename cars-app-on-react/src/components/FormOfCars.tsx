@@ -44,7 +44,7 @@ export default function FormOfCars(){
     }
 
     async function CreateCar(carToCreate: Car){
-        await axios.post('http://localhost:3002/cars', carToCreate, {
+        await axios.post('http://localhost:3001/cars', carToCreate, {
             headers: {
                 'Content-Type': 'application/json'
             }

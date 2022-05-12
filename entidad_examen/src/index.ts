@@ -8,6 +8,8 @@ import SalesController from './service-layer/controllers/SalesController';
 const app = express();
 const port = 3001;
 
+// agrego esta linea porque daba problemas con la seguridad CORS
+app.use(cors());
 app.use(json());
 
 const carsController = new CarsController();
