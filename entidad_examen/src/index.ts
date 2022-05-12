@@ -3,8 +3,10 @@ import { json } from 'body-parser';
 import cors from 'cors';
 import 'reflect-metadata';
 import CarRepository from './service-layer/tasks/CarRepository';
+import SaleRepository from './service-layer/tasks/SaleRepository';
 import respond from './service-layer/tasks/respond';
 import Car from './domain-layer/entities/Car';
+import Sale from "./domain-layer/entities/Sales";
 
 const app = express();
 
@@ -47,16 +49,21 @@ app.delete('/cars/:id', (req, res) => {
 });
 
 app.post('/cars', (req, res) => {
-  const car = new Car(req.body.id, req.body.model, req.body.brand, req.body.year);
+  const sale = new Sale(req.body.id, new Date())
+  const car = new Car(req.body.id, req.body.model, req.body.brand, req.body.year, sale);
 
   const carRepository = new CarRepository();
   carRepository.add(car);
+
+  const saleRepository = new SaleRepository();
+  saleRepository.add(sale);
 
   respond(res, 200, car);
 });
 
 app.put('/cars', (req, res) => {
-  const car = new Car(req.body.id, req.body.model, req.body.brand, req.body.year);
+  const sale = SaleRepository.get(id);
+  const car = new Car(req.body.id, req.body.model, req.body.brand, req.body.year, sale);
 
   const carRepository = new CarRepository();
   carRepository.update(car);
